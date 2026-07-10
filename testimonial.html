@@ -1,45 +1,11 @@
-<!-- index.html-->
+<!-- ═══ TESTIMONIALS SECTION ═══ -->
+<!-- 
+  
+  3. Add the <script> block before </body> in index.html
+  4. Make sure config.js has BIN_ID and API_KEY filled in
+-->
 
-<!DOCTYPE html>
-<html lang="en" data-theme="dark">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ren — Jorenti Borja | BSIT Student & Aspiring Developer</title>
-<meta name="description" content="Ren (Jorenti Borja) — BSIT Student at STI College Dagupan and aspiring software developer. Building practical systems, apps, and tools.">
-<meta name="keywords" content="Jorenti Borja, Ren, BSIT, STI, software developer, portfolio, Flutter, Java, Firebase">
-<meta name="author" content="Jorenti Borja">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://kordan-23.github.io/">
-<meta property="og:title" content="Ren — Jorenti Borja | Aspiring Software Developer">
-<meta property="og:description" content="BSIT Student at STI College Dagupan. Building practical systems and meaningful apps — one commit at a time.">
-<meta property="og:image" content="https://kordan-23.github.io/og-image.png">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Ren — Jorenti Borja | Aspiring Software Developer">
-<meta name="twitter:description" content="BSIT Student at STI College Dagupan. Building practical systems and meaningful apps.">
-<meta name="twitter:image" content="https://kordan-23.github.io/og-image.png">
 
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%2300d4ff'/%3E%3Cstop offset='100%25' stop-color='%237c3aed'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='8' fill='%23080c10'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='central' text-anchor='middle' font-family='Georgia,serif' font-weight='700' font-size='18' fill='url(%23g)'%3ER%3C/text%3E%3C/svg%3E">
-
-<!-- config.js holds ALL secrets — NOT committed to GitHub (in .gitignore) -->
-<script src="config.js"></script>
-
-<!-- Google Analytics — ID loaded from config.js -->
-<script>
-  if (typeof CONFIG !== 'undefined' && CONFIG.GA_ID) {
-    const s = document.createElement('script');
-    s.async = true;
-    s.src = 'https://www.googletagmanager.com/gtag/js?id=' + CONFIG.GA_ID;
-    document.head.appendChild(s);
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', CONFIG.GA_ID);
-  }
-</script>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
 
 <style>
 /* ════════════════════════════════════════
@@ -564,107 +530,89 @@ footer p { font-size: .8rem; color: var(--muted); }
   .hero-photo-wrap::before { inset: -3px; }
 }
 </style>
-</head>
-<body>
 
-<!-- ═══ LOADER ═══ -->
-<div id="loader">
-  <div class="loader-logo">R</div>
-  <div class="loader-bar-wrap"><div class="loader-bar"></div></div>
-  <div class="loader-text">Loading portfolio...</div>
-</div>
+<style>
+/* ─── TESTIMONIALS ─── */
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.25rem;
+  margin-bottom: 3rem;
+}
+.testimonial-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 16px; padding: 1.75rem;
+  position: relative; transition: border-color .2s, transform .2s;
+}
+.testimonial-card:hover { border-color: rgba(0,212,255,0.25); transform: translateY(-3px); }
+.testimonial-card::before {
+  content: '"'; position: absolute; top: .8rem; left: 1.2rem;
+  font-family: var(--font-display); font-size: 4rem; line-height: 1;
+  background: var(--grad); -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent; background-clip: text; opacity: .3;
+}
+.t-message {
+  font-size: .9rem; color: var(--muted); line-height: 1.75;
+  font-style: italic; padding-top: 1.2rem; margin-bottom: 1.2rem;
+}
+.t-author { display: flex; align-items: center; gap: .75rem; }
+.t-avatar {
+  width: 36px; height: 36px; border-radius: 50%; background: var(--grad);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-display); font-weight: 700;
+  font-size: .85rem; color: #fff; flex-shrink: 0;
+}
+.t-name { font-weight: 600; font-size: .875rem; }
+.t-role { font-size: .75rem; color: var(--muted); }
+.t-empty {
+  text-align: center; padding: 3rem; color: var(--muted);
+  font-size: .9rem; border: 1px dashed var(--border); border-radius: 16px;
+  grid-column: 1 / -1;
+}
+.t-submit-wrap {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 16px; padding: 2rem; margin-top: 1rem;
+}
+.t-submit-title {
+  font-family: var(--font-display); font-weight: 700;
+  font-size: 1.05rem; margin-bottom: 1.2rem;
+}
+.t-form { display: flex; flex-direction: column; gap: .85rem; }
+.t-form-row { display: grid; grid-template-columns: 1fr 1fr; gap: .85rem; }
+.t-field { display: flex; flex-direction: column; gap: .35rem; }
+.t-field label {
+  font-size: .75rem; letter-spacing: .08em;
+  text-transform: uppercase; color: var(--muted);
+}
+.t-field input, .t-field textarea {
+  background: var(--bg2); border: 1px solid var(--border);
+  border-radius: 8px; padding: .7rem .9rem; color: var(--text);
+  font-family: var(--font-body); font-size: .88rem; outline: none;
+  resize: vertical; transition: border-color .2s;
+}
+.t-field input:focus, .t-field textarea:focus { border-color: var(--accent); }
+.t-field textarea { min-height: 90px; }
+.t-submit-btn {
+  background: var(--grad); border: none; color: #fff;
+  padding: .8rem; border-radius: 8px; font-weight: 600;
+  font-size: .9rem; cursor: pointer;
+  transition: opacity .2s, transform .2s; width: 100%;
+}
+.t-submit-btn:hover { opacity: .85; transform: translateY(-2px); }
+.t-submit-btn:disabled { opacity: .5; cursor: not-allowed; transform: none; }
+.t-success-msg {
+  display: none; background: rgba(52,211,153,0.08);
+  border: 1px solid rgba(52,211,153,0.25); border-radius: 8px;
+  padding: 1rem; text-align: center; color: #34d399;
+  font-size: .88rem; line-height: 1.6;
+}
+.t-success-msg.show { display: block; }
+@media (max-width: 640px) { .t-form-row { grid-template-columns: 1fr; } }
+</style>
 
-<!-- ═══ CUSTOM CURSOR ═══ -->
-<div class="cursor-dot" id="cursorDot"></div>
-<div class="cursor-ring" id="cursorRing"></div>
 
-<!-- ═══ SCROLL PROGRESS ═══ -->
-<div id="scroll-progress"></div>
 
-<!-- ═══ BACK TO TOP ═══ -->
-<button id="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">↑</button>
 
-<!-- ═══ NAV ═══ -->
-<nav>
-  <div class="nav-logo">REN</div>
-  <ul class="nav-links" id="navLinks">
-    <li><a href="#about">About</a></li>
-    <li><a href="#skills">Skills</a></li>
-    <li><a href="#projects">Projects</a></li>
-    <li><a href="#contact">Contact</a></li>
-    <li><button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">🌙</button></li>
-  </ul>
-  <div class="hamburger" onclick="toggleNav()"><span></span><span></span><span></span></div>
-</nav>
-
-<!-- ═══ HERO ═══ -->
-<section id="hero">
-  <div class="hero-grid-lines"></div>
-  <div class="hero-glow"></div>
-  <div class="hero-glow2"></div>
-  <div class="hero-code-float">
-    <div class="c-cm">// currently building</div>
-    <div><span class="c-kw">class</span> <span class="c-fn">Ren</span> {</div>
-    <div>&nbsp;&nbsp;role = <span class="c-str">"dev"</span>;</div>
-    <div>&nbsp;&nbsp;school = <span class="c-str">"STI"</span>;</div>
-    <div>&nbsp;&nbsp;<span class="c-fn">commit</span>(<span class="c-str">"daily"</span>);</div>
-    <div>}</div>
-  </div>
-  <div class="hero-badge-float"><span>⚡</span> Open to collabs &amp; internships</div>
-  <div class="hero-inner">
-    <div class="hero-text">
-      <div class="hero-badge">Available for Opportunities</div>
-      <h1 class="hero-name">Ren</h1>
-      <p class="hero-subname">Jorenti Borja</p>
-      <p class="hero-tagline"><span class="typing-text" id="typingText"></span></p>
-      <p class="hero-intro">Currently studying IT at STI College Dagupan while building real-world projects and growing as a developer — one commit at a time.</p>
-      <div class="hero-ctas">
-        <a href="#projects" class="btn-primary">
-          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
-          View Projects
-        </a>
-        <a href="#contact" class="btn-outline">
-          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-          Contact Me
-        </a>
-        <a href="cv.pdf" download class="btn-cv">
-          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-          Download CV
-        </a>
-      </div>
-    </div>
-    <div class="hero-photo-wrap">
-      <img src="img/Photo.JPG" alt="Ren — Jorenti Borja" class="hero-photo">
-    </div>
-  </div>
-</section>
-
-<!-- ═══ ABOUT ═══ -->
-<section id="about">
-  <p class="section-label">Who I Am</p>
-  <h2 class="section-title">About Me</h2>
-  <div class="divider"></div>
-  <div class="about-grid">
-    <div class="about-text">
-      <div class="sti-badge">🎓 &nbsp; BSIT Student — STI College Dagupan</div>
-      <p>Hey, I'm <strong>Ren</strong> — a BSIT student with a genuine passion for building software that solves real problems. I'm not here to pretend I know everything; I'm here to learn fast and build meaningfully.</p>
-      <p>I enjoy working on <strong>systems and applications</strong> — from attendance trackers to personal finance tools. Every project teaches me something new, and that's exactly what keeps me going.</p>
-      <p>Outside of coding, I spend time at the <strong>gym</strong> — because consistency there translates directly to consistency in code. I also read when I can, mostly on mindset, systems thinking, and self-improvement.</p>
-      <p>I'm still early in my journey, but I show up every day with a <strong>disciplined mindset and a willingness to grow</strong>.</p>
-      <div class="learning-strip">
-        🔨 <strong>Currently learning:</strong> REST APIs &nbsp;·&nbsp; Firebase Auth &nbsp;·&nbsp; UI/UX basics &nbsp;·&nbsp; Flutter state management
-      </div>
-    </div>
-    <div class="about-stats">
-      <div class="stat-card"><div class="stat-icon">🎓</div><div class="stat-title">BSIT Student</div><div class="stat-text">STI College Dagupan — currently in progress</div></div>
-      <div class="stat-card"><div class="stat-icon">💻</div><div class="stat-title">Developer</div><div class="stat-text">Building apps, systems & web projects</div></div>
-      <div class="stat-card"><div class="stat-icon">🏋️</div><div class="stat-title">Gym-Oriented</div><div class="stat-text">Discipline outside the screen matters too</div></div>
-      <div class="stat-card"><div class="stat-icon">📈</div><div class="stat-title">Growth Mindset</div><div class="stat-text">Learning, iterating, improving — daily</div></div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══ TESTIMONIALS ═══ -->
 <section id="testimonials">
   <p class="section-label">Kind Words</p>
   <h2 class="section-title">Testimonials</h2>
@@ -700,305 +648,78 @@ footer p { font-size: .8rem; color: var(--muted); }
   </div>
 </section>
 
-<!-- ═══ SKILLS ═══ -->
-<section id="skills">
-  <p class="section-label">What I Know</p>
-  <h2 class="section-title">Skills</h2>
-  <div class="divider"></div>
-  <div class="skills-grid">
-    <div class="skill-category">
-      <div class="skill-cat-title">Languages</div>
-      <div class="skill-item"><span class="skill-name">Java</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:65%"></div></div></div>
-      <div class="skill-item"><span class="skill-name">SQL</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:60%"></div></div></div>
-      <div class="skill-item"><span class="skill-name">Firebase</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:55%"></div></div></div>
-      <div class="skill-item"><span class="skill-name">Python</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:35%"></div></div></div>
-      <div class="skill-item"><span class="skill-name">C#</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:30%"></div></div></div>
-      <div class="skill-item"><span class="skill-name">Dart / Flutter</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:30%"></div></div></div>
-    </div>
-    <div class="skill-category">
-      <div class="skill-cat-title">Tools & Tech</div>
-      <div class="skill-tags">
-        <span class="skill-tag">Git & GitHub</span><span class="skill-tag">VS Code</span>
-        <span class="skill-tag">Android Studio</span><span class="skill-tag">Firebase</span>
-        <span class="skill-tag">Claude AI</span><span class="skill-tag">DB Management</span>
-        <span class="skill-tag">REST APIs</span><span class="skill-tag">Version Control</span>
-      </div>
-    </div>
-    <div class="skill-category">
-      <div class="skill-cat-title">Soft Skills</div>
-      <div class="skill-tags">
-        <span class="skill-tag">💪 Consistency</span><span class="skill-tag">🔍 Problem-Solving</span>
-        <span class="skill-tag">🎯 Discipline</span><span class="skill-tag">📚 Willingness to Learn</span>
-        <span class="skill-tag">🤝 Collaboration</span><span class="skill-tag">🔄 Adaptability</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══ PROJECTS ═══ -->
-<section id="projects">
-  <p class="section-label">What I've Built</p>
-  <h2 class="section-title">Projects</h2>
-  <div class="divider"></div>
-  <div class="projects-grid">
-    <div class="project-card">
-      <div class="project-status status-done">✓ Completed</div>
-      <div class="project-title">Gym Management System</div>
-      <div class="project-desc">Eliminates manual logbooks for gym admins — members can be registered, tracked, and managed digitally with real-time Firebase sync.</div>
-      <div class="project-tech"><span class="tech-chip">Java</span><span class="tech-chip">Firebase</span><span class="tech-chip">CRUD</span></div>
-    </div>
-    <div class="project-card">
-      <div class="project-status status-ongoing">Ongoing</div>
-      <div class="project-title">RFID Attendance System with ML</div>
-      <div class="project-desc">Goes beyond tap-in/tap-out — combines RFID hardware with machine learning to detect behavioral patterns and flag anomalies automatically.</div>
-      <div class="project-tech"><span class="tech-chip">RFID</span><span class="tech-chip">Machine Learning</span><span class="tech-chip">Java</span><span class="tech-chip">Firebase</span></div>
-    </div>
-    <div class="project-card">
-      <div class="project-status status-ongoing">Ongoing</div>
-      <div class="project-title">BaonBuddy — Budgeting App</div>
-      <div class="project-desc">A personal finance tracker for real daily use — manage expenses, set savings goals, and visualize spending habits with a clean mobile-first UI.</div>
-      <div class="project-tech"><span class="tech-chip">Dart</span><span class="tech-chip">Flutter</span><span class="tech-chip">SQLite</span><span class="tech-chip">Firebase</span></div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══ SOCIAL ═══ -->
-<section id="social" style="text-align:center;">
-  <p class="section-label">Find Me Online</p>
-  <h2 class="section-title">Social Links</h2>
-  <div class="divider" style="margin:0 auto 1rem;"></div>
-  <p style="color:var(--muted);font-size:.95rem;margin-bottom:1rem;">Connect with me across platforms</p>
-  <div class="social-row">
-    <a href="https://github.com/Kordan-23" target="_blank" class="social-btn">
-      <svg viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.17 6.839 9.49.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.604-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.115 2.504.337 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.741 0 .267.18.578.688.48C19.138 20.167 22 16.418 22 12c0-5.523-4.477-10-10-10z"/></svg>
-      GitHub
-    </a>
-    <a href="https://www.linkedin.com/in/joren-borja-74a223345/" target="_blank" class="social-btn">
-      <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-      LinkedIn
-    </a>
-    <a href="https://www.instagram.com/sabishi_ne/" target="_blank" class="social-btn">
-      <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
-      Instagram
-    </a>
-    <a href="https://www.tiktok.com/@sabishi_ne" target="_blank" class="social-btn">
-      <svg viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
-      TikTok
-    </a>
-  </div>
-</section>
-
-<!-- ═══ CONTACT ═══ -->
-<section id="contact">
-  <p class="section-label">Get In Touch</p>
-  <h2 class="section-title">Contact</h2>
-  <div class="divider"></div>
-  <div class="contact-grid">
-    <div class="contact-info">
-      <p>I'm open to project collaborations, internship opportunities, or just a conversation about tech and development. Don't hesitate to reach out.</p>
-      <a href="mailto:jorenborja1234@gmail.com" class="contact-email">
-        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-        jorenborja1234@gmail.com
-      </a>
-    </div>
-    <form class="contact-form" id="contactForm">
-      <input type="checkbox" name="botcheck" style="display:none">
-      <div class="form-field"><label>Name</label><input type="text" name="name" placeholder="Your name" required></div>
-      <div class="form-field"><label>Email</label><input type="email" name="email" placeholder="your@email.com" required></div>
-      <div class="form-field"><label>Message</label><textarea name="message" placeholder="What's on your mind?" required></textarea></div>
-      <button type="submit" class="btn-submit" id="submitBtn">Send Message →</button>
-      <div class="form-success" id="formSuccess">✅ Message sent! I'll get back to you soon.</div>
-    </form>
-  </div>
-</section>
-
-<!-- ═══ FOOTER ═══ -->
-<footer>
-  <p>© 2025 <span class="footer-grad">Ren</span> — Jorenti Borja &nbsp;·&nbsp; STI College Dagupan</p>
-  <p style="font-size:.78rem;">Built with HTML · CSS · JS</p>
-</footer>
-
+<!-- ────────────────────────────────────────
+  SCRIPT — paste before </body>
+  Keys come from config.js — never hardcode them here
+──────────────────────────────────────── -->
 <script>
-/* ── LOADER ── */
-window.addEventListener('load', () => {
-  setTimeout(() => document.getElementById('loader').classList.add('hide'), 1400);
-});
+/* ── TESTIMONIALS (JSONBin) ──
+   CONFIG.BIN_ID and CONFIG.API_KEY come from config.js
+   which is in .gitignore and never pushed to GitHub      */
 
-/* ── CUSTOM CURSOR ── */
-const dot = document.getElementById('cursorDot');
-const ring = document.getElementById('cursorRing');
-let mouseX = 0, mouseY = 0, ringX = 0, ringY = 0;
-document.addEventListener('mousemove', e => {
-  mouseX = e.clientX; mouseY = e.clientY;
-  dot.style.left = mouseX + 'px'; dot.style.top = mouseY + 'px';
-});
-function animateRing() {
-  ringX += (mouseX - ringX) * 0.12; ringY += (mouseY - ringY) * 0.12;
-  ring.style.left = ringX + 'px'; ring.style.top = ringY + 'px';
-  requestAnimationFrame(animateRing);
-}
-animateRing();
-document.querySelectorAll('a,button,.project-card,.stat-card,.skill-category,.testimonial-card').forEach(el => {
-  el.addEventListener('mouseenter', () => ring.classList.add('hovered'));
-  el.addEventListener('mouseleave', () => ring.classList.remove('hovered'));
-});
-
-/* ── THEME TOGGLE ── */
-const html = document.documentElement;
-const toggleBtn = document.getElementById('themeToggle');
-toggleBtn.addEventListener('click', () => {
-  const isLight = html.getAttribute('data-theme') === 'light';
-  html.setAttribute('data-theme', isLight ? 'dark' : 'light');
-  toggleBtn.textContent = isLight ? '🌙' : '☀️';
-  localStorage.setItem('theme', isLight ? 'dark' : 'light');
-});
-const saved = localStorage.getItem('theme');
-if (saved) { html.setAttribute('data-theme', saved); toggleBtn.textContent = saved === 'light' ? '☀️' : '🌙'; }
-
-/* ── TYPING ANIMATION ── */
-const phrases = [
-  'BSIT Student @ STI College Dagupan',
-  'Aspiring Software Developer',
-  'Building Practical Systems',
-  'Flutter & Java Developer',
-  'Problem Solver & Learner',
-];
-let pi = 0, ci = 0, deleting = false;
-const typingEl = document.getElementById('typingText');
-function type() {
-  const phrase = phrases[pi];
-  if (!deleting) {
-    typingEl.textContent = phrase.slice(0, ci++);
-    if (ci > phrase.length) { deleting = true; setTimeout(type, 1800); return; }
-  } else {
-    typingEl.textContent = phrase.slice(0, ci--);
-    if (ci < 0) { deleting = false; pi = (pi + 1) % phrases.length; ci = 0; }
-  }
-  setTimeout(type, deleting ? 40 : 75);
-}
-setTimeout(type, 800);
-
-/* ── SCROLL PROGRESS + BACK TO TOP ── */
-const progressBar = document.getElementById('scroll-progress');
-const backToTop = document.getElementById('back-to-top');
-window.addEventListener('scroll', () => {
-  const pct = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
-  progressBar.style.width = pct + '%';
-  backToTop.classList.toggle('visible', window.scrollY > 400);
-});
-
-/* ── ACTIVE NAV ── */
-const sections = document.querySelectorAll('section[id]');
-window.addEventListener('scroll', () => {
-  let cur = '';
-  sections.forEach(s => { if (window.scrollY >= s.offsetTop - 100) cur = s.id; });
-  document.querySelectorAll('.nav-links a').forEach(a => {
-    a.style.color = a.getAttribute('href') === '#' + cur ? 'var(--accent)' : '';
-  });
-});
-
-/* ── NAV TOGGLE ── */
-function toggleNav() { document.getElementById('navLinks').classList.toggle('open'); }
-document.querySelectorAll('.nav-links a').forEach(a =>
-  a.addEventListener('click', () => document.getElementById('navLinks').classList.remove('open'))
-);
-
-/* ── FADE IN ON SCROLL ── */
-const obs = new IntersectionObserver(entries => entries.forEach(e => {
-  if (e.isIntersecting) { e.target.style.opacity='1'; e.target.style.transform='translateY(0)'; }
-}), { threshold: 0.1 });
-document.querySelectorAll('.project-card,.skill-category,.stat-card').forEach(el => {
-  el.style.opacity='0'; el.style.transform='translateY(20px)';
-  el.style.transition='opacity .5s ease, transform .5s ease'; obs.observe(el);
-});
-
-/* ── SKILL BARS ── */
-const barObs = new IntersectionObserver(entries => entries.forEach(e => {
-  if (e.isIntersecting) e.target.querySelectorAll('.skill-bar').forEach(b => {
-    const w = b.style.width; b.style.width='0';
-    setTimeout(() => { b.style.transition='width 1s ease'; b.style.width=w; }, 100);
-  });
-}), { threshold: 0.3 });
-document.querySelectorAll('.skill-category').forEach(c => barObs.observe(c));
-
-/* ── WEB3FORMS CONTACT FORM ── */
-const form = document.getElementById('contactForm');
-const submitBtn = document.getElementById('submitBtn');
-const successMsg = document.getElementById('formSuccess');
-form.addEventListener('submit', async e => {
-  e.preventDefault();
-  submitBtn.textContent = 'Sending...'; submitBtn.disabled = true;
-  try {
-    const data = new FormData(form);
-    data.append('access_key', (typeof CONFIG !== 'undefined') ? CONFIG.WEB3FORMS_KEY : '');
-    data.append('subject', 'New message from portfolio — Ren');
-    data.append('from_name', 'Portfolio Contact');
-    const res = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: data });
-    const json = await res.json();
-    if (json.success) {
-      form.reset(); submitBtn.style.display = 'none'; successMsg.classList.add('show');
-    } else {
-      submitBtn.textContent = 'Error — try emailing directly'; submitBtn.disabled = false;
-    }
-  } catch {
-    submitBtn.textContent = 'Error — try emailing directly'; submitBtn.disabled = false;
-  }
-});
-
-/* ── TESTIMONIALS (JSONBin via config.js) ──
-   No keys here — all loaded from config.js which is in .gitignore */
 (function() {
+  /* Safety check — warn in console if config.js isn't loaded */
   if (typeof CONFIG === 'undefined' || !CONFIG.BIN_ID || !CONFIG.API_KEY) {
-    console.warn('Testimonials: config.js missing or incomplete.');
+    console.warn('Testimonials: CONFIG not found. Make sure config.js is loaded before this script.');
     const grid = document.getElementById('testimonialsGrid');
     if (grid) grid.innerHTML = '<div class="t-empty">Testimonials unavailable — config missing.</div>';
     return;
   }
 
-  const BIN_URL     = `https://api.jsonbin.io/v3/b/${CONFIG.BIN_ID}`;
-  const HDR_READ    = { 'X-Master-Key': CONFIG.API_KEY };
-  const HDR_WRITE   = { 'Content-Type': 'application/json', 'X-Master-Key': CONFIG.API_KEY };
+  const BIN_URL = `https://api.jsonbin.io/v3/b/${CONFIG.BIN_ID}`;
+  const HEADERS_READ  = { 'X-Master-Key': CONFIG.API_KEY };
+  const HEADERS_WRITE = { 'Content-Type': 'application/json', 'X-Master-Key': CONFIG.API_KEY };
 
+  /* ── Load & render approved testimonials ── */
   async function loadTestimonials() {
     const grid = document.getElementById('testimonialsGrid');
     try {
-      const res  = await fetch(BIN_URL + '/latest', { headers: HDR_READ });
+      const res  = await fetch(BIN_URL + '/latest', { headers: HEADERS_READ });
       const json = await res.json();
       const approved = (json.record?.testimonials || [])
         .filter(t => t.status === 'approved')
-        .reverse();
+        .reverse(); /* newest first */
+
       if (!approved.length) {
         grid.innerHTML = '<div class="t-empty">No testimonials yet — be the first to leave one below! 👇</div>';
         return;
       }
+
       grid.innerHTML = approved.map(t => `
         <div class="testimonial-card">
-          <div class="t-message">${esc(t.message)}</div>
+          <div class="t-message">${escHtml(t.message)}</div>
           <div class="t-author">
             <div class="t-avatar">${t.name.charAt(0).toUpperCase()}</div>
             <div>
-              <div class="t-name">${esc(t.name)}</div>
-              <div class="t-role">${esc(t.role || 'Visitor')}</div>
+              <div class="t-name">${escHtml(t.name)}</div>
+              <div class="t-role">${escHtml(t.role || 'Visitor')}</div>
             </div>
           </div>
         </div>
       `).join('');
     } catch(err) {
-      console.error('Testimonials load error:', err);
+      console.error('Failed to load testimonials:', err);
       grid.innerHTML = '<div class="t-empty">Could not load testimonials right now.</div>';
     }
   }
 
+  /* ── Submit new testimonial (saves as pending) ── */
   document.getElementById('testimonialForm').addEventListener('submit', async function(e) {
     e.preventDefault();
-    const btn = document.getElementById('tSubmitBtn');
-    const msg = document.getElementById('tSuccessMsg');
-    btn.disabled = true; btn.textContent = 'Submitting...';
+    const btn        = document.getElementById('tSubmitBtn');
+    const successMsg = document.getElementById('tSuccessMsg');
+
+    btn.disabled = true;
+    btn.textContent = 'Submitting...';
+
     try {
-      const res  = await fetch(BIN_URL + '/latest', { headers: HDR_READ });
+      /* Fetch current bin data */
+      const res  = await fetch(BIN_URL + '/latest', { headers: HEADERS_READ });
       const json = await res.json();
       const data = json.record || { testimonials: [] };
-      const fd   = new FormData(this);
+
+      /* Append new submission as pending */
+      const fd = new FormData(this);
       data.testimonials.push({
         id:      Date.now().toString(),
         name:    fd.get('name').trim(),
@@ -1007,23 +728,33 @@ form.addEventListener('submit', async e => {
         status:  'pending',
         date:    new Date().toISOString()
       });
-      await fetch(BIN_URL, { method: 'PUT', headers: HDR_WRITE, body: JSON.stringify(data) });
+
+      /* Save back to JSONBin */
+      await fetch(BIN_URL, {
+        method:  'PUT',
+        headers: HEADERS_WRITE,
+        body:    JSON.stringify(data)
+      });
+
       this.reset();
       btn.style.display = 'none';
-      msg.classList.add('show');
+      successMsg.classList.add('show');
+
     } catch(err) {
-      console.error('Testimonial submit error:', err);
-      btn.disabled = false; btn.textContent = 'Submit Testimonial';
-      alert('Something went wrong. Please try again.');
+      console.error('Submit failed:', err);
+      btn.disabled = false;
+      btn.textContent = 'Submit Testimonial';
+      alert('Something went wrong. Please try again or email me directly.');
     }
   });
 
-  function esc(s) {
-    return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  /* ── Escape HTML to prevent XSS ── */
+  function escHtml(s) {
+    return String(s).replace(/[&<>"']/g, c => ({
+      '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;'
+    }[c]));
   }
 
   loadTestimonials();
 })();
 </script>
-</body>
-</html>
